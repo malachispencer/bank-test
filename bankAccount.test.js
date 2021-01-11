@@ -56,5 +56,15 @@ describe('BankAccount', () => {
 
       expect(bankAccount.showBalance()).toEqual(1000);
     });
+
+    test('adds the transaction to transactions array', () => {
+      bankAccount.deposit(1000, '2021-01-11');
+      const transactions = bankAccount.showTransactions();
+
+      expect(transactions[0]).toBeInstanceOf(Object);
+      expect(transactions[0].date).toBe('2021-01-11');
+      expect(transactions[0].amount).toBe(1000);
+      expect(transactions[0].newBalance).toBe(1000);
+    });
   });
 });

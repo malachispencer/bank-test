@@ -16,15 +16,19 @@ class BankAccount {
 
      this.balance += amount;
 
-    //  this.transactions.push({
-    //    date,
-    //    amount,
-    //    newBalance: this.balance
-    //  });
+     this.transactions.push({
+       date,
+       amount,
+       newBalance: this.balance
+     });
   }
 
   showBalance() {
     return this.balance;
+  }
+
+  showTransactions() {
+    return this.transactions;
   }
 
   #isInvalidDate(date) {
