@@ -4,7 +4,7 @@ describe('BankAccount', () => {
   let bankAccount;
 
   beforeEach(() => {
-    bankAccount =  new BankAccount();
+    bankAccount = new BankAccount();
   });
 
   describe('#deposit', () => {
