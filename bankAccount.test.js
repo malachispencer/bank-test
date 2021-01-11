@@ -54,7 +54,7 @@ describe('BankAccount', () => {
     test(`increments the client's balance by the amount`, () => {
       bankAccount.deposit(1000, '2021-01-11');
 
-      expect(bankAccount.showBalance()).toEqual(1000);
+      expect(bankAccount.showBalance()).toEqual('1000.00');
     });
 
     test('adds the transaction to transactions array', () => {
@@ -63,9 +63,9 @@ describe('BankAccount', () => {
 
       expect(transactions[0]).toBeInstanceOf(Object);
       expect(transactions[0].date).toBe('2021/01/11');
-      expect(transactions[0].amount).toBe(1000);
+      expect(transactions[0].amount).toBe('1000.00');
       expect(transactions[0].type).toBe('debit');
-      expect(transactions[0].newBalance).toBe(1000);
+      expect(transactions[0].newBalance).toBe('1000.00');
     });
   });
 
@@ -98,7 +98,7 @@ describe('BankAccount', () => {
       bankAccount.deposit(2000, '2021-01-13');
       bankAccount.withdraw(500, '2021-01-14');
 
-      expect(bankAccount.showBalance()).toEqual(2500);
+      expect(bankAccount.showBalance()).toEqual('2500.00');
     });
 
     test('adds transactions to transactions array', () => {
@@ -107,9 +107,9 @@ describe('BankAccount', () => {
 
       expect(transactions[0]).toBeInstanceOf(Object);
       expect(transactions[0].date).toBe('2021/01/11');
-      expect(transactions[0].amount).toBe(500);
+      expect(transactions[0].amount).toBe('500.00');
       expect(transactions[0].type).toBe('credit');
-      expect(transactions[0].newBalance).toBe(-500);
+      expect(transactions[0].newBalance).toBe('-500.00');
     });
   });
 

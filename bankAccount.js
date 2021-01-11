@@ -17,12 +17,13 @@ class BankAccount {
     this.balance += amount;
 
     date = this.#formatDate(date);
+    amount = this.#formatAmount(amount);
 
     this.transactions.push({
       date,
       amount,
       type: 'debit',
-      newBalance: this.balance
+      newBalance: this.showBalance()
     });
   }
 
@@ -38,17 +39,18 @@ class BankAccount {
     this.balance -= amount;
 
     date = this.#formatDate(date);
+    amount = this.#formatAmount(amount);
 
     this.transactions.push({
       date,
       amount,
       type: 'credit',
-      newBalance: this.balance
+      newBalance: this.showBalance()
     });
   }
 
   showBalance() {
-    return this.balance;
+    return this.#formatAmount(this.balance);
   }
 
   showTransactions() {
@@ -75,6 +77,10 @@ class BankAccount {
 
   #formatDate(date) {
     return date.replace(/-/g, '/');
+  }
+
+  #formatAmount(amount) {
+    return amount.toFixed(2);
   }
 }
 
