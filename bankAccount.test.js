@@ -46,5 +46,11 @@ describe('BankAccount', () => {
         bankAccount.deposit(NaN, '2021-01-11');
       }).toThrow('Amount must be a number');
     });
+
+    test(`increments the client's balance by the amount`, () => {
+      bankAccount.deposit(1000, '2021-01-11');
+
+      expect(bankAccount.showBalance()).toEqual(1000);
+    });
   });
 });
