@@ -101,7 +101,7 @@ describe('BankAccount', () => {
       expect(bankAccount.showBalance()).toEqual('2500.00');
     });
 
-    test('adds transactions to transactions array', () => {
+    test('adds transaction to transactions array', () => {
       bankAccount.withdraw(500, '11-01-2021');
       const transactions = bankAccount.showTransactions();
 
