@@ -10,59 +10,59 @@ describe('BankAccount', () => {
   describe('#deposit', () => {
     test('allows client to enter an amount and a date', () => {
       const depositSpy = jest.spyOn(bankAccount, 'deposit');
-      bankAccount.deposit(1000, '2021-01-11');
+      bankAccount.deposit(1000, '11-01-2021');
 
-      expect(depositSpy).toHaveBeenCalledWith(1000, '2021-01-11');
+      expect(depositSpy).toHaveBeenCalledWith(1000, '11-01-2021');
     });
 
     test('raises an error if date is not valid', () => {
       expect(() => { 
-        bankAccount.deposit(1000, '2021/01/11');
-      }).toThrow('Please enter valid date in the format YYYY-MM-DD');
+        bankAccount.deposit(1000, '11/01/2021');
+      }).toThrow('Please enter valid date in the format DD-MM-YYYY');
 
       expect(() => { 
-        bankAccount.deposit(1000, '2021-12-32');
-      }).toThrow('Please enter valid date in the format YYYY-MM-DD');
+        bankAccount.deposit(1000, '32-12-2021');
+      }).toThrow('Please enter valid date in the format DD-MM-YYYY');
     });
 
     test('raises an error if the amount is not a number', () => {
       expect(() => {
-        bankAccount.deposit('', '2021-01-11');
+        bankAccount.deposit('', '11-01-2021');
       }).toThrow('Amount must be a number');
 
       expect(() => {
-        bankAccount.deposit(null, '2021-01-11');
+        bankAccount.deposit(null, '11-01-2021');
       }).toThrow('Amount must be a number');
 
       expect(() => {
-        bankAccount.deposit(undefined, '2021-01-11');
+        bankAccount.deposit(undefined, '11-01-2021');
       }).toThrow('Amount must be a number');
 
       expect(() => {
-        bankAccount.deposit(true, '2021-01-11');
+        bankAccount.deposit(true, '11-01-2021');
       }).toThrow('Amount must be a number');
 
       expect(() => {
-        bankAccount.deposit(false, '2021-01-11');
+        bankAccount.deposit(false, '11-01-2021');
       }).toThrow('Amount must be a number');
 
       expect(() => {
-        bankAccount.deposit(NaN, '2021-01-11');
+        bankAccount.deposit(NaN, '11-01-2021');
       }).toThrow('Amount must be a number');
     });
 
     test(`increments the client's balance by the amount`, () => {
-      bankAccount.deposit(1000, '2021-01-11');
+      bankAccount.deposit(1000, '11-01-2021');
 
       expect(bankAccount.showBalance()).toEqual('1000.00');
     });
 
     test('adds the transaction to transactions array', () => {
-      bankAccount.deposit(1000, '2021-01-11');
+      bankAccount.deposit(1000, '11-01-2021');
       const transactions = bankAccount.showTransactions();
 
       expect(transactions[0]).toBeInstanceOf(Object);
-      expect(transactions[0].date).toBe('2021/01/11');
+      expect(transactions[0].date).toBe('11/01/2021');
       expect(transactions[0].amount).toBe('1000.00');
       expect(transactions[0].type).toBe('debit');
       expect(transactions[0].newBalance).toBe('1000.00');
@@ -72,41 +72,41 @@ describe('BankAccount', () => {
   describe('#withdraw', () => {
     test('allows client to enter an amount and a date', () => {
       const withdrawSpy = jest.spyOn(bankAccount, 'withdraw');
-      bankAccount.withdraw(500, '2021-01-11');
+      bankAccount.withdraw(500, '11-01-2021');
 
-      expect(withdrawSpy).toHaveBeenCalledWith(500, '2021-01-11');
+      expect(withdrawSpy).toHaveBeenCalledWith(500, '11-01-2021');
     });
 
     test('raises an error if date is not valid', () => {
       expect(() => { 
         bankAccount.withdraw(500, '20210111');
-      }).toThrow('Please enter valid date in the format YYYY-MM-DD');
+      }).toThrow('Please enter valid date in the format DD-MM-YYYY');
 
       expect(() => { 
-        bankAccount.withdraw(500, '2021-13-31');
-      }).toThrow('Please enter valid date in the format YYYY-MM-DD');
+        bankAccount.withdraw(500, '31-13-2021');
+      }).toThrow('Please enter valid date in the format DD-MM-YYYY');
     });
 
     test('raises an error if the amount is not a number', () => {
       expect(() => {
-        bankAccount.withdraw('five hundred pounds', '2021-01-11');
+        bankAccount.withdraw('five hundred pounds', '11-01-2021');
       }).toThrow('Amount must be a number');
     });
 
     test(`decrements the client's balance by the amount`, () => {
-      bankAccount.deposit(1000, '2021-01-11');
-      bankAccount.deposit(2000, '2021-01-13');
-      bankAccount.withdraw(500, '2021-01-14');
+      bankAccount.deposit(1000, '11-01-2021');
+      bankAccount.deposit(2000, '13-01-2021');
+      bankAccount.withdraw(500, '14-01-2021');
 
       expect(bankAccount.showBalance()).toEqual('2500.00');
     });
 
     test('adds transactions to transactions array', () => {
-      bankAccount.withdraw(500, '2021-01-11');
+      bankAccount.withdraw(500, '11-01-2021');
       const transactions = bankAccount.showTransactions();
 
       expect(transactions[0]).toBeInstanceOf(Object);
-      expect(transactions[0].date).toBe('2021/01/11');
+      expect(transactions[0].date).toBe('11/01/2021');
       expect(transactions[0].amount).toBe('500.00');
       expect(transactions[0].type).toBe('credit');
       expect(transactions[0].newBalance).toBe('-500.00');
@@ -115,13 +115,14 @@ describe('BankAccount', () => {
 
   // describe('#showStatement', () => {
   //   test('returns a multiline string of all transactions', () => {
-  //     bankAccount.deposit(1000, '2021-01-11');
+  //     bankAccount.deposit(1000, '11-01-2021');
   //     bankAccount.deposit(2000, '2021-01-13');
   //     bankAccount.withdraw(500, '2021-01-14');
 
-  //     expect(bankAccount.showStatement()).toEqual(
-  //       `date || credit || debit || balance`
-  //     )
+  //     expect(bankAccount.showStatement()).toEqual(`
+  //       date || credit || debit || balance
+
+  //     `)
   //   });
   // });
 });

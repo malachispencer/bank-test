@@ -1,17 +1,19 @@
 class BankAccount {
   constructor() {
     this.INITIAL_BALANCE = 0;
+    this.INVALID_DATE_ERROR_MSG = 'Please enter valid date in the format DD-MM-YYYY';
+    this.INVALID_AMOUNT_ERROR_MSG = 'Amount must be a number';
     this.balance = this.INITIAL_BALANCE;
     this.transactions = [];
   }
 
   deposit(amount, date) {
     if (this.#isInvalidDate(date)) { 
-      throw 'Please enter valid date in the format YYYY-MM-DD';
+      throw this.INVALID_DATE_ERROR_MSG;
     }
 
     if (this.#isInvalidAmount(amount)) {
-      throw 'Amount must be a number';
+      throw this.INVALID_AMOUNT_ERROR_MSG;
     }
 
     this.balance += amount;
@@ -29,11 +31,11 @@ class BankAccount {
 
   withdraw(amount, date) {
     if (this.#isInvalidDate(date)) { 
-      throw 'Please enter valid date in the format YYYY-MM-DD';
+      throw this.INVALID_DATE_ERROR_MSG;
     }
 
     if (this.#isInvalidAmount(amount)) {
-      throw 'Amount must be a number';
+      throw this.INVALID_AMOUNT_ERROR_MSG;
     }
 
     this.balance -= amount;
@@ -58,11 +60,13 @@ class BankAccount {
   }
 
   #isInvalidDate(date) {
-    const validFormat = new RegExp(/^\d{4}-\d{2}-\d{2}$/);
+    const validFormat = new RegExp(/^\d{2}-\d{2}-\d{4}$/);
 
     if (!validFormat.test(date)) { return true; }
 
-    if (new Date(date) == 'Invalid Date') { return true; }
+    const testDate = date.split('-').reverse().join('-');
+
+    if (new Date(testDate) == 'Invalid Date') { return true; }
 
     return false;
   }
