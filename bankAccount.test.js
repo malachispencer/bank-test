@@ -67,4 +67,13 @@ describe('BankAccount', () => {
       expect(transactions[0].newBalance).toBe(1000);
     });
   });
+
+  describe('#withdraw', () => {
+    test('allows client to enter an amount and a date', () => {
+      const withdrawSpy = jest.spyOn(bankAccount, 'withdraw');
+      bankAccount.withdraw(500, '2021-01-11');
+
+      expect(withdrawSpy).toHaveBeenCalledWith(500, '2021-01-11');
+    });
+  });
 });

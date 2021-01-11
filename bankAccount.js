@@ -23,6 +23,10 @@ class BankAccount {
      });
   }
 
+  withdraw(amount, date) {
+    
+  }
+
   showBalance() {
     return this.balance;
   }
