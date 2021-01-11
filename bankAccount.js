@@ -34,6 +34,11 @@ class BankAccount {
 
     this.balance -= amount;
 
+    this.transactions.push({
+      date,
+      amount,
+      newBalance: this.balance
+    });
   }
 
   showBalance() {
@@ -61,7 +66,6 @@ class BankAccount {
 
     return false;
   }
-
 }
 
 module.exports = BankAccount;

@@ -99,5 +99,15 @@ describe('BankAccount', () => {
 
       expect(bankAccount.showBalance()).toEqual(2500);
     });
+
+    test('adds transactions to transactions array', () => {
+      bankAccount.withdraw(500, '2021-01-11');
+      const transactions = bankAccount.showTransactions();
+
+      expect(transactions[0]).toBeInstanceOf(Object);
+      expect(transactions[0].date).toBe('2021-01-11');
+      expect(transactions[0].amount).toBe(500);
+      expect(transactions[0].newBalance).toBe(-500);
+    });
   });
 });
