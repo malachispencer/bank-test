@@ -13,6 +13,18 @@ class BankAccount {
      if (this.#isInvalidAmount(amount)) {
        throw 'Amount must be a number';
      }
+
+     this.balance += amount;
+
+    //  this.transactions.push({
+    //    date,
+    //    amount,
+    //    newBalance: this.balance
+    //  });
+  }
+
+  showBalance() {
+    return this.balance;
   }
 
   #isInvalidDate(date) {

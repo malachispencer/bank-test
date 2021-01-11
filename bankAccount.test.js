@@ -15,9 +15,13 @@ describe('BankAccount', () => {
       expect(depositSpy).toHaveBeenCalledWith(1000, '2021-01-11');
     });
 
-    test('raises an error if date format is not valid', () => {
+    test('raises an error if date is not valid', () => {
       expect(() => { 
         bankAccount.deposit(1000, '2021/01/11');
+      }).toThrow('Please enter valid date in the format YYYY-MM-DD');
+
+      expect(() => { 
+        bankAccount.deposit(1000, '2021/12/32');
       }).toThrow('Please enter valid date in the format YYYY-MM-DD');
     });
 
