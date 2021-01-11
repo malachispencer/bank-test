@@ -9,6 +9,10 @@ class BankAccount {
     if (this.#isInvalidDate(date)) { 
       throw 'Please enter valid date in the format YYYY-MM-DD';
      }
+
+     if (this.#isInvalidAmount(amount)) {
+       throw 'Amount must be a number';
+     }
   }
 
   #isInvalidDate(date) {
@@ -24,6 +28,15 @@ class BankAccount {
 
     return false;
   }
+
+  #isInvalidAmount(amount) {
+    if (typeof amount !== 'number' || isNaN(amount)) {
+      return true;
+    }
+
+    return false;
+  }
+
 }
 
 module.exports = BankAccount;

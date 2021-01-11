@@ -23,8 +23,28 @@ describe('BankAccount', () => {
 
     test('raises an error if the amount is not a number', () => {
       expect(() => {
-        bankAccount.deposit('wrong', '2021-01-11');
-      }).toThrow('Amount must be an a number');
+        bankAccount.deposit('', '2021-01-11');
+      }).toThrow('Amount must be a number');
+
+      expect(() => {
+        bankAccount.deposit(null, '2021-01-11');
+      }).toThrow('Amount must be a number');
+
+      expect(() => {
+        bankAccount.deposit(undefined, '2021-01-11');
+      }).toThrow('Amount must be a number');
+
+      expect(() => {
+        bankAccount.deposit(true, '2021-01-11');
+      }).toThrow('Amount must be a number');
+
+      expect(() => {
+        bankAccount.deposit(false, '2021-01-11');
+      }).toThrow('Amount must be a number');
+
+      expect(() => {
+        bankAccount.deposit(NaN, '2021-01-11');
+      }).toThrow('Amount must be a number');
     });
   });
 });
