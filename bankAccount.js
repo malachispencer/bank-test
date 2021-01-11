@@ -32,6 +32,8 @@ class BankAccount {
       throw 'Amount must be a number';
     }
 
+    this.balance -= amount;
+
   }
 
   showBalance() {
@@ -45,13 +47,9 @@ class BankAccount {
   #isInvalidDate(date) {
     const validFormat = new RegExp(/^\d{4}-\d{2}-\d{2}$/);
 
-    if (!validFormat.test(date)) {
-      return true;
-    }
+    if (!validFormat.test(date)) { return true; }
 
-    if (new Date(date) === 'Invalid Date') { 
-      return true; 
-    }
+    if (new Date(date) == 'Invalid Date') { return true; }
 
     return false;
   }

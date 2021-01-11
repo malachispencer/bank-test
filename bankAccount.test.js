@@ -21,7 +21,7 @@ describe('BankAccount', () => {
       }).toThrow('Please enter valid date in the format YYYY-MM-DD');
 
       expect(() => { 
-        bankAccount.deposit(1000, '2021/12/32');
+        bankAccount.deposit(1000, '2021-12-32');
       }).toThrow('Please enter valid date in the format YYYY-MM-DD');
     });
 
@@ -82,7 +82,7 @@ describe('BankAccount', () => {
       }).toThrow('Please enter valid date in the format YYYY-MM-DD');
 
       expect(() => { 
-        bankAccount.withdraw(500, '2021/13/31');
+        bankAccount.withdraw(500, '2021-13-31');
       }).toThrow('Please enter valid date in the format YYYY-MM-DD');
     });
 
@@ -90,6 +90,14 @@ describe('BankAccount', () => {
       expect(() => {
         bankAccount.withdraw('five hundred pounds', '2021-01-11');
       }).toThrow('Amount must be a number');
+    });
+
+    test(`decrements the client's balance by the amount`, () => {
+      bankAccount.deposit(1000, '2021-01-11');
+      bankAccount.deposit(2000, '2021-01-13');
+      bankAccount.withdraw(500, '2021-01-14');
+
+      expect(bankAccount.showBalance()).toEqual(2500);
     });
   });
 });
