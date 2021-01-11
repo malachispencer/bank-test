@@ -82,8 +82,14 @@ describe('BankAccount', () => {
       }).toThrow('Please enter valid date in the format YYYY-MM-DD');
 
       expect(() => { 
-        bankAccount.deposit(1000, '2021/13/31');
+        bankAccount.withdraw(500, '2021/13/31');
       }).toThrow('Please enter valid date in the format YYYY-MM-DD');
+    });
+
+    test('raises an error if the amount is not a number', () => {
+      expect(() => {
+        bankAccount.withdraw('five hundred pounds', '2021-01-11');
+      }).toThrow('Amount must be a number');
     });
   });
 });

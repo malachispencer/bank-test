@@ -10,23 +10,28 @@ class BankAccount {
       throw 'Please enter valid date in the format YYYY-MM-DD';
     }
 
-     if (this.#isInvalidAmount(amount)) {
-       throw 'Amount must be a number';
-     }
+    if (this.#isInvalidAmount(amount)) {
+      throw 'Amount must be a number';
+    }
 
-     this.balance += amount;
+    this.balance += amount;
 
-     this.transactions.push({
-       date,
-       amount,
-       newBalance: this.balance
-     });
+    this.transactions.push({
+      date,
+      amount,
+      newBalance: this.balance
+    });
   }
 
   withdraw(amount, date) {
     if (this.#isInvalidDate(date)) { 
       throw 'Please enter valid date in the format YYYY-MM-DD';
     }
+
+    if (this.#isInvalidAmount(amount)) {
+      throw 'Amount must be a number';
+    }
+
   }
 
   showBalance() {
