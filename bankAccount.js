@@ -8,7 +8,7 @@ class BankAccount {
   deposit(amount, date) {
     if (this.#isInvalidDate(date)) { 
       throw 'Please enter valid date in the format YYYY-MM-DD';
-     }
+    }
 
      if (this.#isInvalidAmount(amount)) {
        throw 'Amount must be a number';
@@ -24,7 +24,9 @@ class BankAccount {
   }
 
   withdraw(amount, date) {
-    
+    if (this.#isInvalidDate(date)) { 
+      throw 'Please enter valid date in the format YYYY-MM-DD';
+    }
   }
 
   showBalance() {

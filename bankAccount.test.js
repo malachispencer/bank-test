@@ -75,5 +75,15 @@ describe('BankAccount', () => {
 
       expect(withdrawSpy).toHaveBeenCalledWith(500, '2021-01-11');
     });
+
+    test('raises an error if date is not valid', () => {
+      expect(() => { 
+        bankAccount.withdraw(500, '20210111');
+      }).toThrow('Please enter valid date in the format YYYY-MM-DD');
+
+      expect(() => { 
+        bankAccount.deposit(1000, '2021/13/31');
+      }).toThrow('Please enter valid date in the format YYYY-MM-DD');
+    });
   });
 });
