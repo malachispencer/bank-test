@@ -65,7 +65,7 @@ describe('BankAccount', () => {
       expect(transactions[0].date).toBe('11/01/2021');
       expect(transactions[0].amount).toBe('1000.00');
       expect(transactions[0].type).toBe('debit');
-      expect(transactions[0].newBalance).toBe('1000.00');
+      expect(transactions[0].currentBalance).toBe('1000.00');
     });
   });
 
@@ -109,20 +109,23 @@ describe('BankAccount', () => {
       expect(transactions[0].date).toBe('11/01/2021');
       expect(transactions[0].amount).toBe('500.00');
       expect(transactions[0].type).toBe('credit');
-      expect(transactions[0].newBalance).toBe('-500.00');
+      expect(transactions[0].currentBalance).toBe('-500.00');
     });
   });
 
-  // describe('#showStatement', () => {
-  //   test('returns a multiline string of all transactions', () => {
-  //     bankAccount.deposit(1000, '11-01-2021');
-  //     bankAccount.deposit(2000, '2021-01-13');
-  //     bankAccount.withdraw(500, '2021-01-14');
+  describe('#showStatement', () => {
+    test('returns a multiline string of all transactions', () => {
+      bankAccount.deposit(1000, '11-01-2021');
+      bankAccount.deposit(2000, '13-01-2021');
+      bankAccount.withdraw(500, '14-01-2021');
 
-  //     expect(bankAccount.showStatement()).toEqual(`
-  //       date || credit || debit || balance
+      const header = 'date || credit || debit || balance\n';
+      const bodyOne = '14/01/2021 || 500.00 || || 2500.00\n';
+      const bodyTwo = '13/01/2021 || || 2000.00 || 3000.00\n';
+      const bodyThree = '11/01/2021 || || 1000.00 || 1000.00';
+      const statement = header + bodyOne + bodyTwo + bodyThree;
 
-  //     `)
-  //   });
-  // });
+      expect(bankAccount.showStatement()).toEqual(statement);
+    });
+  });
 });

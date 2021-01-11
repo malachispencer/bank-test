@@ -25,7 +25,7 @@ class BankAccount {
       date,
       amount,
       type: 'debit',
-      newBalance: this.showBalance()
+      currentBalance: this.showBalance()
     });
   }
 
@@ -47,7 +47,7 @@ class BankAccount {
       date,
       amount,
       type: 'credit',
-      newBalance: this.showBalance()
+      currentBalance: this.showBalance()
     });
   }
 
@@ -56,7 +56,24 @@ class BankAccount {
   }
 
   showTransactions() {
-    return this.transactions;
+    return [...this.transactions];
+  }
+
+  showStatement() {
+    const header = 'date || credit || debit || balance\n';
+
+    const body = [...this.transactions].map(transaction => {
+      const { date, amount, type, currentBalance } = transaction;
+
+      if (type === 'credit') {
+        return date + ' || ' + amount + ' || || ' + currentBalance;
+      } else {
+        return date + ' || || ' + amount + ' || ' + currentBalance;
+      }
+      
+    }).reverse().join('\n');
+
+    return header + body;
   }
 
   #isInvalidDate(date) {
