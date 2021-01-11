@@ -8,11 +8,11 @@ describe('BankAccount', () => {
   });
 
   describe('#deposit', () => {
-    test('it allows client to add an amount and a date', () => {
-      const depositFn = bankAccount.deposit(1000, '11/01/21');
-      const mockFn = jest.fn(depositFn);
+    test('allows client to enter an amount and a date', () => {
+      const depositSpy = jest.spyOn(bankAccount, 'deposit');
+      bankAccount.deposit(1000, '11/01/21');
 
-      expect(depositFn).toHaveBeenCalledWith(1000, '11/01/20');
+      expect(depositSpy).toHaveBeenCalledWith(1000, '11/01/21');
     });
   });
 });
