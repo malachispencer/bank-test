@@ -21,5 +21,6 @@ Code written in JavaScript with Node.js runtime environment, unit tests performe
 
 ```npm test```
 
-## Coverage Snapshot
+## Test Coverage
 
+<img width="565" alt="Screenshot 2021-01-11 at 19 49 51" src="https://user-images.githubusercontent.com/71923215/104231279-a35a9a80-5446-11eb-9096-339b2b39b3fb.png">
